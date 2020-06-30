@@ -3,7 +3,7 @@
  *Author: zore.wang
  *Description: 文件功能描述
  */
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import { useDrop } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 const style = {
@@ -21,15 +21,22 @@ const style = {
 export const Dustbin = ({ accept, lastDroppedItem, onDrop }) => {
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: ItemTypes.BOX,
-    drop: () => ({ name: accept }),
+    drop: onDrop,
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
   })
+  const [list, seList] = useState([])
   const isActive = canDrop && isOver
-  console.log(accept, lastDroppedItem, onDrop, 'isActive')
+  console.log(accept, 'accept')
+  console.log(lastDroppedItem, 'lastDroppedItem')
+  console.log(onDrop, 'onDrop')
+
   let backgroundColor = '#222'
+  // if (lastDroppedItem) {
+  //   seList([...list, lastDroppedItem])
+  // }
   if (isActive) {
     backgroundColor = 'darkgreen'
   } else if (canDrop) {
@@ -37,7 +44,12 @@ export const Dustbin = ({ accept, lastDroppedItem, onDrop }) => {
   }
   return (
     <div ref={drop} style={{ ...style, backgroundColor }}>
-      {isActive ? 'Release to drop' : 'Drag a box here'}
+      {isActive
+        ? 'Release to drop'
+        : `This dustbin accepts: ${accept.join(', ')}`}
+      {lastDroppedItem && (
+        <p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
+      )}
     </div>
   )
 }

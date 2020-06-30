@@ -9,7 +9,7 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Row, Col, Card, Tag } from 'antd';
 import { ReactSortable } from "react-sortablejs";
 const contentList = {
-  tab1: <p>content1</p>,
+  tab1: <p>content21</p>,
   tab2: <p>content2</p>,
 };
 

@@ -12,9 +12,11 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import Example from './components/example'
 
 const FlowchartDesigner = (props) => {
-  return <DndProvider backend={HTML5Backend}>
-    <Example/>
-  </DndProvider>
+  return <PageHeaderWrapper>
+    <DndProvider backend={HTML5Backend}>
+      <Example/>
+    </DndProvider>
+  </PageHeaderWrapper>
 }
 
 export default FlowchartDesigner
